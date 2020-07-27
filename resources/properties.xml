@@ -1,0 +1,4 @@
+<properties>
+	<property id="initialWait" type="number">1</property>
+	<property id="maxSeqLenth" type="number">10</property>
+</properties>
