@@ -10,7 +10,7 @@ var step;
 var iteration;
 var wait;
 var interval;
-var maxStep;
+var maxStep; 
 var screenHeight;
 var screenWidth;
 var endGame;

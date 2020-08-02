@@ -2,7 +2,7 @@ using Toybox.WatchUi as Ui;
 using Toybox.System;
 
 //Emilia
-class GamePlayDelegate extends Ui.MenuInputDelegate {
+class GamePlayDelegate extends Ui.BehaviorDelegate {
 
     function initialize() {
         MenuInputDelegate.initialize();
@@ -12,6 +12,10 @@ class GamePlayDelegate extends Ui.MenuInputDelegate {
     var keys = [ Ui.KEY_UP, Ui.KEY_ENTER, Ui.KEY_DOWN, Ui.KEY_ESC];
 
 	function onKey(k) {
+		System.println("GamePlayDelegate onKey step:" + step + "seq[step]:" + seq[step]);
+		
+		keyPressed = true;
+		
 		//user hit a key so the timer stops,
 		//then we check if it's the right key or not
 		sequenceTimer.stop();
@@ -19,18 +23,16 @@ class GamePlayDelegate extends Ui.MenuInputDelegate {
 		//if the user hits the button that the sequence expected,
 		//display color, increment step, and create a new GamePlayView
 		if (k.getKey() == keys[seq[step]]){
+			System.println("Correct Key Press");
 			gamePlayColorIndex = seq[step];
-			WatchUi.requestUpdate();	
+			Ui.requestUpdate();	
 			step++;
 			
 			//when step reaches the end of the list, 
- 			//reset step to zero and stop timer, then transition to gameplay      
+ 			//reset step to zero, then transition to PlaySequence      
 			if (step >= seq.size()) {
 				step = 0;
 				Ui.pushView(new PlaySequenceView(), new PlaySequenceDelegate(), Ui.SLIDE_IMMEDIATE);
-    		}
-    		else {
-    			Ui.pushView(new GamePlayView(), new GamePlayDelegate(), Ui.SLIDE_IMMEDIATE);
     		}
 			
 			

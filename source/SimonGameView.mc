@@ -15,7 +15,7 @@ class SimonGameView extends WatchUi.View {
 		clearingTimer = new Timer.Timer();
     	sequenceTimer = new Timer.Timer();
     	iteration = 0;
-		step = 0;
+		step = 0; 
 		seq = [];
     }
 

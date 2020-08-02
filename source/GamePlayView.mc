@@ -6,10 +6,11 @@ using Toybox.Math;
 using Toybox.System;
 
 var gamePlayColorIndex;
+var keyPressed;
 
 //Emilia
 class GamePlayView extends Ui.View {
-	var deeCee;
+	
 
     function initialize() {
         View.initialize();
@@ -17,20 +18,23 @@ class GamePlayView extends Ui.View {
 
     // Load your resources here
     function onLayout(dc) {
+    	System.println("GamePlayView onLayout");
     	gamePlayColorIndex = -1; //black
+    	keyPressed = false;
 		
-		sequenceTimer.start(method(:endGamecallback), 3000, false);
+		//start sequenceTimer which gives player 3 seconds to press the correct button
+		//if no button is pressed within this time, player loses and endGameCallback is called
+		sequenceTimer.start(method(:endGameCallback), 3000, false);
     }
 	
 	//end game and return to start screen
-	function endGamecallback() {
-		sequenceTimer.stop();
-        Ui.pushView(new SimonGameView(), new SimonGameDelegate(), Ui.SLIDE_IMMEDIATE);
+	function endGameCallback() {
+        Ui.pushView(new SimonGameView(), new SimonGameDelegate(), Ui.SLIDE_IMMEDIATE); //go to start screen
     }
     
     function resetColorCallback() {
-    	
-    	showColor(deeCee, gamePlayColorIndex);
+    	//can't pass dc into this function which is needed to show color
+    	//so do nothing here and show color in onUpdate after
     }
     
     // Called when this View is brought to the foreground. Restore
@@ -41,16 +45,15 @@ class GamePlayView extends Ui.View {
 
     // Update the view
     function onUpdate(dc) {
-    	play(seq[step]);
+    	//play(seq[step]); //play sound
     	
-    	showColor(dc, gamePlayColorIndex);
+    	showColor(dc, gamePlayColorIndex); //show color
 		
-		gamePlayColorIndex = -1;
-		deeCee = dc;
-		
-		clearingTimer.start(method(:resetColorCallback), 500, false);
-		
-		
+    	
+    	if(keyPressed) {
+    		keyPressed = false;
+    		sequenceTimer.start(method(:endGameCallback), 3000, false);
+    	}
     }
 
     // Called when this View is removed from the screen. Save the

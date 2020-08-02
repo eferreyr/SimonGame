@@ -17,6 +17,7 @@ function showColor(dc, colorIndex) {
 	//keep background black and draw a circle in corresponding corner
 	dc.setColor( colorIndex < 0 ? Graphics.COLOR_BLACK : colors[colorIndex] , Graphics.COLOR_BLACK);
 	dc.fillCircle(getX(colorIndex), getY(colorIndex), screenWidth * .75);
+	//use local variables
 }
 
 //Button 0 has coordinates (0,0), Button 1 has corrdinates (0,1), and so on
@@ -83,7 +84,8 @@ class PlaySequenceView extends Ui.View {
     
     // Update the view
     function onUpdate(dc) {
- 
+ 		System.println("PlaySequenceView onUpdate step:" + step + "currentColorIndex:" + currentColorIndex);
+ 		
  		//when step reaches the end of the list, 
  		//reset step to zero and stop timer, then transition to gameplay      
 		if (step >= seq.size()) {
@@ -93,7 +95,7 @@ class PlaySequenceView extends Ui.View {
     	}
 		
 		//play tone at index given by value in seq[step]
-		play(seq[step]);
+		//play(seq[step]);
 		
 		//draw color
 		showColor(dc, currentColorIndex);
@@ -103,6 +105,8 @@ class PlaySequenceView extends Ui.View {
 		//this is for distinguishing that two of the same colors in a row
 		//are, in fact, two different elements in the sequence
 		clearingTimer.start(method(:clearColorCallback), waitTime() * BLINK_FACTOR, false);
+		
+		System.println("X");
 		
     }
 	
@@ -122,6 +126,7 @@ class PlaySequenceView extends Ui.View {
     }
     
     function drawColorCallback() {
+    	clearingTimer.stop();
         step++; //increment step
         
         //while there is another element in seq, set currentColorIndex to next value in seq
