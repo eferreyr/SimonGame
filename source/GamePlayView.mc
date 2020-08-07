@@ -8,7 +8,6 @@ using Toybox.System;
 var gamePlayColorIndex;
 var keyPressed;
 
-//Emilia
 class GamePlayView extends Ui.View {
 	
 
@@ -18,7 +17,6 @@ class GamePlayView extends Ui.View {
 
     // Load your resources here
     function onLayout(dc) {
-    	System.println("GamePlayView onLayout");
     	gamePlayColorIndex = -1; //black
     	keyPressed = false;
 		

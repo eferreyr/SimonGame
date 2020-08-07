@@ -17,7 +17,6 @@ function showColor(dc, colorIndex) {
 	//keep background black and draw a circle in corresponding corner
 	dc.setColor( colorIndex < 0 ? Graphics.COLOR_BLACK : colors[colorIndex] , Graphics.COLOR_BLACK);
 	dc.fillCircle(getX(colorIndex), getY(colorIndex), screenWidth * .75);
-	//use local variables
 }
 
 //Button 0 has coordinates (0,0), Button 1 has corrdinates (0,1), and so on
@@ -65,8 +64,6 @@ class PlaySequenceView extends Ui.View {
 		
 		//increment iteration
 		iteration++;
-
-		System.println("PlaySequenceView onLayout Iteration:" + iteration + " seq: " + seq);
 		
 		currentColorIndex = seq[step];
 		
@@ -76,16 +73,11 @@ class PlaySequenceView extends Ui.View {
 		
     }
 
-    // Called when this View is brought to the foreground. Restore
-    // the state of this View and prepare it to be shown. This includes
-    // loading resources into memory.
     function onShow() {
     }
     
     // Update the view
     function onUpdate(dc) {
- 		System.println("PlaySequenceView onUpdate step:" + step + "currentColorIndex:" + currentColorIndex);
- 		
  		//when step reaches the end of the list, 
  		//reset step to zero and stop timer, then transition to gameplay      
 		if (step >= seq.size()) {
@@ -104,11 +96,7 @@ class PlaySequenceView extends Ui.View {
 		//then paints screen black again
 		//this is for distinguishing that two of the same colors in a row
 		//are, in fact, two different elements in the sequence
-		System.println("Clearing Timer Start");
 		clearingTimer.start(method(:clearColorCallback), waitTime() * BLINK_FACTOR, false);
-		
-		System.println("X");
-		
     }
 	
     // Called when this View is removed from the screen. Save the
@@ -120,15 +108,13 @@ class PlaySequenceView extends Ui.View {
 	//generates a random integer whose modulus of 4 is then caluculated 
 	//the resulting number will be between 0 and 3
 	//these four possible numbers each represent a button in the simon game 
-	//this number is then added to the end of a list "s" 
+	//this number is then added to the end of a list "seq" 
 	//that represents the sequence the buttons should be pushed in
     function addToSequence() {
     	seq.add(Math.rand() % 4);
     }
     
     function drawColorCallback() {
-    	System.println("Clearing Timer Stop - step:" + step);
-//    	clearingTimer.stop();
         step++; //increment step
         
         //while there is another element in seq, set currentColorIndex to next value in seq
@@ -142,7 +128,6 @@ class PlaySequenceView extends Ui.View {
     
     //update color to black
     function clearColorCallback() {
-    	System.println("Clearing Timer Ended");
         currentColorIndex = -1;  // black
         Ui.requestUpdate();
     }

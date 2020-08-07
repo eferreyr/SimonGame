@@ -12,8 +12,6 @@ class SimonGameView extends WatchUi.View {
 		screenHeight = dc.getHeight();
 		screenWidth = dc.getWidth();
 		
-		clearingTimer = new Timer.Timer();
-    	sequenceTimer = new Timer.Timer();
     	iteration = 0;
 		step = 0; 
 		seq = [];
@@ -23,7 +21,6 @@ class SimonGameView extends WatchUi.View {
     // the state of this View and prepare it to be shown. This includes
     // loading resources into memory.
     function onShow() {
-    	System.println("SimonGameView onShow ");
     	View.onShow();
     }
 

@@ -23,7 +23,8 @@ class SimonGameApp extends App.AppBase {
 
     // onStart() is called on application start up
     function onStart(state) {
-    	
+    	clearingTimer = new Timer.Timer();
+    	sequenceTimer = new Timer.Timer();
     }
 
     // onStop() is called when your application is exiting

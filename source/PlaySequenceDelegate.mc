@@ -16,6 +16,7 @@ class PlaySequenceDelegate extends Ui.BehaviorDelegate {
 			Ui.pushView(new SimonGameView(), new SimonGameDelegate(), Ui.SLIDE_IMMEDIATE);
 		}
 		
+		return true;
 	}
 //
 //    function onMenuItem(item) {
