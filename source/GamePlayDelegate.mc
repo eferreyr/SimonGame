@@ -5,11 +5,11 @@ using Toybox.System;
 class GamePlayDelegate extends Ui.BehaviorDelegate {
 
     function initialize() {
-        MenuInputDelegate.initialize();
+        BehaviorDelegate.initialize();
     }
     
     //           0=>green      1=>red      2=>yellow    3=>blue
-    var keys = [ Ui.KEY_UP, Ui.KEY_ENTER, Ui.KEY_DOWN, Ui.KEY_ESC];
+    var keys = [ Ui.KEY_UP, Ui.KEY_ENTER, Ui.KEY_DOWN, Ui.KEY_ENTER];
 
 	function onKey(k) {
 		System.println("GamePlayDelegate onKey step:" + step + "seq[step]:" + seq[step]);

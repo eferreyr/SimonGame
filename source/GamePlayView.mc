@@ -49,7 +49,6 @@ class GamePlayView extends Ui.View {
     	
     	showColor(dc, gamePlayColorIndex); //show color
 		
-    	
     	if(keyPressed) {
     		keyPressed = false;
     		sequenceTimer.start(method(:endGameCallback), 3000, false);

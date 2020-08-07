@@ -104,6 +104,7 @@ class PlaySequenceView extends Ui.View {
 		//then paints screen black again
 		//this is for distinguishing that two of the same colors in a row
 		//are, in fact, two different elements in the sequence
+		System.println("Clearing Timer Start");
 		clearingTimer.start(method(:clearColorCallback), waitTime() * BLINK_FACTOR, false);
 		
 		System.println("X");
@@ -126,7 +127,8 @@ class PlaySequenceView extends Ui.View {
     }
     
     function drawColorCallback() {
-    	clearingTimer.stop();
+    	System.println("Clearing Timer Stop - step:" + step);
+//    	clearingTimer.stop();
         step++; //increment step
         
         //while there is another element in seq, set currentColorIndex to next value in seq
@@ -140,12 +142,12 @@ class PlaySequenceView extends Ui.View {
     
     //update color to black
     function clearColorCallback() {
+    	System.println("Clearing Timer Ended");
         currentColorIndex = -1;  // black
         Ui.requestUpdate();
     }
 
 	function waitTime() {
-		// if this is step 0, start immediately (10ms), otherwise calculate the wait
 		return Math.pow(ACCELERATION_FACTOR, iteration) * 1000;
 	}
 	

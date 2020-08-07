@@ -17,8 +17,8 @@ class PlaySequenceDelegate extends Ui.BehaviorDelegate {
 		}
 		
 	}
-
-    function onMenuItem(item) {
-    }
+//
+//    function onMenuItem(item) {
+//    }
 
 }
