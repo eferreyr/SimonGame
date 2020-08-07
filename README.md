@@ -11,5 +11,3 @@ These include, but are not limited to:
 - how to play tones
 - how to use timers
 - how to use action listeners
-
-**This is currently a WORK IN PROGRESS and if run, will break.**
